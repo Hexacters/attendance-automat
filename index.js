@@ -13,7 +13,7 @@ const url = 'https://people.mookambikainfo.com/smihrms/zp#home/dashboard';
 
 const start = async () => {
 
-    const isCheckIn = momnet().isBetween(momnet().hour(9).minute(30), momnet().hour(9).minute(35));
+    const isCheckIn = momnet().isBetween(momnet().hour(9).minute(10), momnet().hour(9).minute(35));
     const isCheckout = momnet().isBetween(momnet().hour(21).minute(28), momnet().hour(21).minute(33));
     console.clear();
     console.log("Zoho Attendance - Auto Check-in check-out")
@@ -21,7 +21,7 @@ const start = async () => {
     if (isCheckout) {
         var driver = new webdriver.Builder()
             .withCapabilities(webdriver.Capabilities.chrome())
-            .setChromeOptions(option.headless()).build();
+            .setChromeOptions().build();
 
         await driver.get(url);
 
@@ -41,7 +41,7 @@ const start = async () => {
     if (isCheckIn) {
         var driver = new webdriver.Builder()
             .withCapabilities(webdriver.Capabilities.chrome())
-            .setChromeOptions(option.headless()).build();
+            .setChromeOptions().build();
 
         await driver.get(url);
         const name = await driver.findElement(By.id('ZPD_Top_Att_Stat')).getText();
@@ -60,5 +60,5 @@ const start = async () => {
 }
 
 // Start the Program
-setInterval(start, 1000 * 60)
+setInterval(start, 10000 * 60)
 start();
